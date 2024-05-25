@@ -1,1 +1,1 @@
-export { AnimationManager } from "./AnimationManager";
+export { AnimationManager, AnimationManagerConfig } from "./AnimationManager";
