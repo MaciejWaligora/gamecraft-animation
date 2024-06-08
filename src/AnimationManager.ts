@@ -50,6 +50,10 @@ export class AnimationManager<Tconfig extends AnimationManagerConfig>{
         }
 
         const animation = new ParticleEmitterSpinAnimation(config);
+        if (scope && onFinished){
+            animation.onFinishedAnimationSignal.addListener(onFinished, scope);
+
+        }
         this._addAnimation(animation);
     }
 

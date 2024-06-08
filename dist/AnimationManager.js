@@ -34,6 +34,9 @@ class AnimationManager {
             }
         };
         const animation = new ParticleEmitterSpinner_1.ParticleEmitterSpinAnimation(config);
+        if (scope && onFinished) {
+            animation.onFinishedAnimationSignal.addListener(onFinished, scope);
+        }
         this._addAnimation(animation);
     }
     playLinearMoveAnimation(target, duration, endPosition) {
