@@ -9,6 +9,8 @@ import { SpinAnimation, SpinAnimationConfig } from "./Animations/SpinAnimation";
 import { SlideInFromLeftAninmation, SlideInFromLeftAninmationConfig } from "./Animations/SlideInfromLeftAnimation";
 import { SlideOutToRightAnimtaion, SlideOutToRightanimtaionConfig } from "./Animations/SlideOutToRightAnimation";
 import { ConstantMoveAnimation, ConstantMoveAnimationConfig } from "./Animations/ConstantMoveAnimation";
+import { DirectionalExplosionEmitter } from "gamecraft-particle-system";
+import { ParticleEmitterSpinAnimation, ParticleEmitterSpinAnimationConfig } from "./Animations/ParticleEmitterSpinner";
 
 
 export type Direction = ('up'|'down'|'left'|'right');
@@ -33,6 +35,22 @@ export class AnimationManager<Tconfig extends AnimationManagerConfig>{
 
     private _addAnimation(animation: Animation<AnimationConfig>) {
         this._animations.push(animation);
+    }
+
+    public playSpinWithPArticles(target: View<ViewConfig>, numRotations: number, direction: boolean = false, duration: number, particleEmitter: DirectionalExplosionEmitter, onFinished?: ()=>void, scope?: Object){
+        const config: ParticleEmitterSpinAnimationConfig = {
+            target: target,
+            numRotations: numRotations,
+            direction: direction,
+            duration: duration,
+            particleEmitter: particleEmitter,
+            easingFunction: function (progress: number): number {
+                return 2 * Math.pow(Math.sin(progress * 2*Math.PI),2); 
+            }
+        }
+
+        const animation = new ParticleEmitterSpinAnimation(config);
+        this._addAnimation(animation);
     }
 
     public playLinearMoveAnimation(target: View<ViewConfig>, duration: number, endPosition: {x: number, y: number}){

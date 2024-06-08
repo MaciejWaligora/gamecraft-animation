@@ -3,6 +3,7 @@ import * as PIXI from 'pixijs';
 import { View, ViewConfig } from "gamecraft-view";
 import { SpinAnimation, SpinAnimationConfig } from "./Animations/SpinAnimation";
 import { ConstantMoveAnimation, ConstantMoveAnimationConfig } from "./Animations/ConstantMoveAnimation";
+import { DirectionalExplosionEmitter } from "gamecraft-particle-system";
 export type Direction = ('up' | 'down' | 'left' | 'right');
 export interface AnimationManagerConfig {
     renderer: PIXI.Application;
@@ -12,6 +13,7 @@ export declare class AnimationManager<Tconfig extends AnimationManagerConfig> {
     private _renderer;
     constructor(config: Tconfig);
     private _addAnimation;
+    playSpinWithPArticles(target: View<ViewConfig>, numRotations: number, direction: boolean | undefined, duration: number, particleEmitter: DirectionalExplosionEmitter, onFinished?: () => void, scope?: Object): void;
     playLinearMoveAnimation(target: View<ViewConfig>, duration: number, endPosition: {
         x: number;
         y: number;

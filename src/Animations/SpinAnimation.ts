@@ -7,12 +7,12 @@ export interface SpinAnimationConfig extends AnimationConfig {
 }
 
 export class SpinAnimation<Tconfig extends SpinAnimationConfig> extends Animation<SpinAnimationConfig> {
-    private _numRotations: number;
-    private _totalAngle: number;
-    private _speed: number;
-    private _initialPos = {x: this._target.x, y: this._target.y}
-    private _alreadyspun = 0;
-    private _direction = false //false = clockwise, true = ocunter-clockwise
+    protected _numRotations: number;
+    protected _totalAngle: number;
+    protected _speed: number;
+    protected _initialPos = {x: this._target.x, y: this._target.y}
+    protected _alreadyspun = 0;
+    protected _direction = false //false = clockwise, true = ocunter-clockwise
 
     constructor(config: Tconfig) {
         super(config);

@@ -9,6 +9,7 @@ const SpinAnimation_1 = require("./Animations/SpinAnimation");
 const SlideInfromLeftAnimation_1 = require("./Animations/SlideInfromLeftAnimation");
 const SlideOutToRightAnimation_1 = require("./Animations/SlideOutToRightAnimation");
 const ConstantMoveAnimation_1 = require("./Animations/ConstantMoveAnimation");
+const ParticleEmitterSpinner_1 = require("./Animations/ParticleEmitterSpinner");
 class AnimationManager {
     constructor(config) {
         this._animations = [];
@@ -20,6 +21,20 @@ class AnimationManager {
     }
     _addAnimation(animation) {
         this._animations.push(animation);
+    }
+    playSpinWithPArticles(target, numRotations, direction = false, duration, particleEmitter, onFinished, scope) {
+        const config = {
+            target: target,
+            numRotations: numRotations,
+            direction: direction,
+            duration: duration,
+            particleEmitter: particleEmitter,
+            easingFunction: function (progress) {
+                return 2 * Math.pow(Math.sin(progress * 2 * Math.PI), 2);
+            }
+        };
+        const animation = new ParticleEmitterSpinner_1.ParticleEmitterSpinAnimation(config);
+        this._addAnimation(animation);
     }
     playLinearMoveAnimation(target, duration, endPosition) {
         const config = {

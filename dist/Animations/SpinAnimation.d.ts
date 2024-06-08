@@ -5,12 +5,15 @@ export interface SpinAnimationConfig extends AnimationConfig {
     direction?: boolean;
 }
 export declare class SpinAnimation<Tconfig extends SpinAnimationConfig> extends Animation<SpinAnimationConfig> {
-    private _numRotations;
-    private _totalAngle;
-    private _speed;
-    private _initialPos;
-    private _alreadyspun;
-    private _direction;
+    protected _numRotations: number;
+    protected _totalAngle: number;
+    protected _speed: number;
+    protected _initialPos: {
+        x: number;
+        y: number;
+    };
+    protected _alreadyspun: number;
+    protected _direction: boolean;
     constructor(config: Tconfig);
     protected _callback(delta: number): void;
     protected _onAnimationFinished(): void;
